@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import type { SectionProps } from "@/types"
 
-export default function Section({ id, title, subtitle, content, showButton, buttonText, buttonUrl, bgImage }: SectionProps) {
+export default function Section({ id, title, subtitle, content, showButton, buttonText, buttonUrl, buttonScrollTo, bgImage }: SectionProps) {
   const [visible, setVisible] = useState(false)
   const ref = useRef<HTMLElement>(null)
 
@@ -55,7 +55,13 @@ export default function Section({ id, title, subtitle, content, showButton, butt
               variant="outline"
               size="lg"
               className="text-[#FFD700] bg-transparent border-[#FFD700] hover:bg-[#FFD700] hover:text-black transition-colors font-bold tracking-widest uppercase"
-              onClick={() => buttonUrl && window.open(buttonUrl, '_blank')}
+              onClick={() => {
+                if (buttonScrollTo) {
+                  document.getElementById(buttonScrollTo)?.scrollIntoView({ behavior: 'smooth' })
+                } else if (buttonUrl) {
+                  window.open(buttonUrl, '_blank')
+                }
+              }}
             >
               {buttonText}
             </Button>

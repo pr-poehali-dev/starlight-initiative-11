@@ -8,6 +8,7 @@ export interface Section {
   showButton?: boolean
   buttonText?: string
   buttonUrl?: string
+  buttonScrollTo?: string
   bgImage?: string
 }
 

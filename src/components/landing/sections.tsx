@@ -6,7 +6,8 @@ export const sections = [
     subtitle: <Badge variant="outline" className="text-[#FFD700] border-[#FFD700]">Только для хардкорщиков</Badge>,
     title: "Топ сложнейших уровней Geometry Dash.",
     showButton: true,
-    buttonText: 'Смотреть список'
+    buttonText: 'Смотреть список',
+    buttonScrollTo: 'top1'
   },
   {
     id: 'top1',
