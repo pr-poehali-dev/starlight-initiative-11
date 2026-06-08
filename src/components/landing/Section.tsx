@@ -1,18 +1,43 @@
+import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import type { SectionProps } from "@/types"
 
 export default function Section({ id, title, subtitle, content, showButton, buttonText, buttonUrl, bgImage }: SectionProps) {
+  const [visible, setVisible] = useState(false)
+  const ref = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true)
+        else setVisible(false)
+      },
+      { threshold: 0.3 }
+    )
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <section id={id} className="relative min-h-screen w-full flex flex-col justify-center p-8 md:p-16 lg:p-24">
+    <section ref={ref} id={id} className="relative min-h-screen w-full flex flex-col justify-center p-8 md:p-16 lg:p-24">
       {bgImage && (
         <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${bgImage})` }}
+          className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+          style={{
+            backgroundImage: `url(${bgImage})`,
+            opacity: visible ? 1 : 0,
+          }}
         >
           <div className="absolute inset-0 bg-black/65" />
         </div>
       )}
-      <div className="relative z-10">
+      <div
+        className="relative z-10 transition-all duration-700"
+        style={{
+          opacity: visible ? 1 : 0,
+          transform: visible ? 'translateY(0)' : 'translateY(40px)',
+        }}
+      >
         {subtitle && (
           <div className="mb-12">{subtitle}</div>
         )}
