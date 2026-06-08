@@ -43,6 +43,7 @@ export const sections = [
     title: 'Готов принять вызов?',
     content: 'Эти уровни — не просто игра. Это испытание воли, реакции и терпения. Тысячи часов практики отделяют тебя от легенды.',
     showButton: true,
-    buttonText: 'Полный рейтинг'
+    buttonText: 'Полный рейтинг',
+    buttonUrl: 'https://demonlist.org'
   },
 ]
